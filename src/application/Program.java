@@ -22,28 +22,30 @@ public class Program {
 
 		if (!checkOut.after(checkIn)) {
 			System.out.println("Error in reservation: check-out date must be after check-in date");
-		} else {
+		} 
+		else {
+			
 			Reservation reservation = new Reservation(number, checkIn, checkOut);
 			System.out.println("Reservation: " + reservation);
-
 			System.out.println();
 			System.out.println("Enter data to update the reservation: ");
 			System.out.print("Check-in date (dd/MM/yyyy): ");
 			checkIn = sdf.parse(sc.next());
 			System.out.print("Check-out date (dd/MM/yyyy): ");
 			checkOut = sdf.parse(sc.next());
-
-			Date now = new Date();
-			if (checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in reservation: check-out date must be after check-in date");
-			} else if (!checkOut.after(checkIn)) {
-				System.out.println("Error in reservation: check-out date must be after check-in date");
-			} else {
-				reservation.updateDates(checkIn, checkOut);
-				System.out.println("Reservation: " + reservation);
+			
+			String erro = reservation.updateDates(checkIn, checkOut);
+			
+			if(erro != null) {
+			System.out.println("Error in reservation " + erro);
 			}
+			
+			else {
+			System.out.println("Reservation: " + reservation);
+			}	
+		
 		}
-
+			
 		sc.close();
 	}
 
